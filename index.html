@@ -11,51 +11,63 @@
             border-radius: 10px;
             border: 10px;
             margin: 10px;
-            /* border-color: azure; */
+        }
+        #font{
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-size: 50px;
+            color: rgb(255, 255, 255);
+            -webkit-text-stroke-width: 0.1px;
+            -webkit-text-stroke-color: rgba(0, 0, 0, 0.884);
+            margin-bottom: -15px;
+            margin-top: -15px;
         }
         #random {
             display: flex;
             position: relative; /* Added to enable the transform animation */
             overflow: hidden; /* Ensures the content is not revealed until the animation */
-            border-right: .15em solid orange; /* The typwriter cursor */
+            width: 60%;
+            color: rgba(105, 196, 248, 0.644);
+            border-right: .15em solid white; /* The typwriter cursor */
             white-space: nowrap; /* Keeps the content on a single line */
             animation: 
                 typing 3.5s steps(40, end),
                 blink-caret .75s step-end infinite;
-            
         }
-
+        #height{
+            margin-top: -14px;
+            font-size: 40px;
+        }
         /* The typing effect */
         @keyframes typing {
         from { width: 0 }
-        to { width: 100% }
+        to { width: 60%}
         }
 
         /* The typewriter cursor effect */
         @keyframes blink-caret {
         from, to { border-color: transparent }
-        50% { border-color: orange; }
+        50% { border-color: white; }
         }
 
     </style>
 </head>
   <body class="bg-dark">
-    <nav class="navbar navbar-expand-lg bg-secondary">
+    <nav class="navbar navbar-expand-lg h5 text-bg-secondary bg-opacity-25">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Clock</a>
+            <a class="navbar-brand text-primary" id="height" href="#">Clock</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active text-light" aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link text-light" href="todo.html">TODO's List</a>
                 </li>
                 <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Dropdown
                 </a>
                 <ul class="dropdown-menu">
@@ -65,24 +77,24 @@
                     <li><a class="dropdown-item" href="#">Something else here</a></li>
                 </ul>
                 </li>
-                <li class="nav-item">
-                <a class="nav-link disabled">Disabled</a>
-                </li>
             </ul>
             <form class="d-flex" role="search">
-                <input class="search bg-dark" type="search" placeholder=" Search" aria-label="Search">
-                <button class="btn bg-body-secondary btn-outline-success" type="submit">Search</button>
+                <input class="search text-bg-primary bg-dark" type="search" placeholder=" Search" aria-label="Search">
+                <button class="btn h1 mt-2 btn-primary" type="submit">Search</button>
+
             </form>
             </div>
         </div>
     </nav>
     <div class="container">
         <div class="mt-4 p-5 bg-gradient text-white rounded">
-            <h1 class="display-4">Current time is: <span id="time"></span></h1>
-            <p class="lead">This is a clock with indian time zone </p>
+            <h1 class="display-4 font-monospace"><b>Current time is:</b> <span id="time"></span></h1>
+            <p class="lead text-secondary">This is a clock with indian time zone </p>
             <hr class="my-4">
             <div id="random">"The two most powerful warriors are patience and time. "– Leo Tolstoy, War and Peace.</div>
-            <!-- <button></button> -->
+            <a href="https://www.timeanddate.com/worldclock/search.html" target="_blank">
+            <button class="btn my-4 btn-primary" title="Browse time in google">Browse Time</button>
+            </a>
         </div>
     </div>
     <script>
