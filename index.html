@@ -21,12 +21,15 @@
             margin-bottom: -15px;
             margin-top: -15px;
         }
+        #color-text{
+            color: rgb(71, 129, 206);
+        }
         .random {
             display: flex;
             position: relative; /* Added to enable the transform animation */
             overflow: hidden; /* Ensures the content is not revealed until the animation */
             width: 60%;
-            color: rgba(105, 196, 248, 0.644);
+            color: rgba(0, 122, 192, 0.644);
         }
         
         .random #anim::after {
@@ -97,7 +100,7 @@
     </nav>
     <div class="container">
         <div class="mt-4 p-5 bg-gradient text-white rounded">
-            <h1 class="display-4 font-monospace"><b>Current time is:</b> <span id="time"></span></h1>
+            <h1 class="display-4 font-monospace"><b id="color-text">Current time is:</b> <span id="time"></span></h1>
             <p class="lead text-secondary">This is a clock with indian time zone </p>
             <hr class="my-4">
             <div class="random"><span id="anim">"The two most powerful warriors are patience and time. "– Leo Tolstoy, War and Peace.</span></div>
@@ -122,13 +125,13 @@
     
 
     const lines = [
-      `“Time you enjoy wasting is not wasted time.” – Marthe Troly-Curtin. `,
-      `“We must use time as a tool, not as a couch.” – John F. Kennedy. `,
-      `“Time is what we want most but what we use worst.” – William Penn. `,
-      `“Tough times never last, but tough people do.” – Robert H. Schuller. `,
-      `“Someday” is a disease that will take your dreams to the grave with you.” – Timothy Ferriss. `,
-      `“Yesterday’s the past, tomorrow’s the future, but today is a gift. That’s why it’s called the present.” – Bil Keane. `,
-      `“Better three hours too soon than a minute too late.” – William Shakespeare. `,
+      `“Time you enjoy wasting is not wasted time.” \– Marthe Troly-Curtin. `,
+      `“We must use time as a tool, not as a couch.” \– John F. Kennedy. `,
+      `“Time is what we want most but what we use worst.” \– William Penn. `,
+      `“Tough times never last, but tough people do.” \– Robert H. Schuller. `,
+      `“Someday” is a disease that will take your dreams to the grave with you.” \– Timothy Ferriss. `,
+      `“Yesterday\’s the past, tomorrow\’s the future, but today is a gift. That\’s why it\’s called the present.” \– Bil Keane. `,
+      `“Better three hours too soon than a minute too late.” \– William Shakespeare. `,
     ];
 
     function typewriterEffect() {
