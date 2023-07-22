@@ -21,41 +21,50 @@
             margin-bottom: -15px;
             margin-top: -15px;
         }
-        #random {
+        .random {
             display: flex;
             position: relative; /* Added to enable the transform animation */
             overflow: hidden; /* Ensures the content is not revealed until the animation */
             width: 60%;
             color: rgba(105, 196, 248, 0.644);
-            border-right: .15em solid white; /* The typwriter cursor */
-            white-space: nowrap; /* Keeps the content on a single line */
-            animation: 
-                typing 3.5s steps(40, end),
-                blink-caret .75s step-end infinite;
+        }
+        
+        .random #anim::after {
+            content: "";
+            border-right: 2px solid white;
+            white-space: nowrap;
+            margin: 0;
+            letter-spacing: 2px;
+            animation: typewriter 10s steps(40) forwards,
+                        blinkrate 0.8s infinite;
+                        
+        }
+        @keyframes blinkrate {
+            0% { border-color: white; } /* Initial color */
+            50% { border-color: transparent; } /* Blink effect - border becomes transparent */
+            100% { border-color: white; } /* Back to the initial color */
+        }
+
+
+        @keyframes typewriter {
+            from{
+                width: 0; /* Start with zero width, effectively hiding the text */
+            }
+            to {
+                width: 100%; /* Gradually increase the width to reveal the text */
+            }
         }
         #height{
             margin-top: -14px;
             font-size: 40px;
         }
-        /* The typing effect */
-        @keyframes typing {
-        from { width: 0 }
-        to { width: 60%}
-        }
-
-        /* The typewriter cursor effect */
-        @keyframes blink-caret {
-        from, to { border-color: transparent }
-        50% { border-color: white; }
-        }
-
     </style>
 </head>
   <body class="bg-dark">
     <nav class="navbar navbar-expand-lg h5 text-bg-secondary bg-opacity-25">
         <div class="container-fluid">
             <a class="navbar-brand text-primary" id="height" href="#">Clock</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -91,7 +100,7 @@
             <h1 class="display-4 font-monospace"><b>Current time is:</b> <span id="time"></span></h1>
             <p class="lead text-secondary">This is a clock with indian time zone </p>
             <hr class="my-4">
-            <div id="random">"The two most powerful warriors are patience and time. "– Leo Tolstoy, War and Peace.</div>
+            <div class="random"><span id="anim">"The two most powerful warriors are patience and time. "– Leo Tolstoy, War and Peace.</span></div>
             <a href="https://www.timeanddate.com/worldclock/search.html" target="_blank">
             <button class="btn my-4 btn-primary" title="Browse time in google">Browse Time</button>
             </a>
@@ -109,34 +118,37 @@
             document.getElementById('time').innerHTML = time + "<br>on " + date;
         }, 1000);
         let a = 1;
-        setInterval(() => {
-            a = Math.floor(Math.random() * 10);
-            if(a == 1){
-                document.getElementById('random').innerText="\"Time is money.\" – Benjamin Franklin.";
+      
+    
 
-            }else if(a == 2){
-                document.getElementById('random').innerText="\"Time waits for no one.\" - Folklore.";
-            }else if(a == 4){
-                document.getElementById('random').innerText="\"Better three hours too soon than a minute too late.\" - William Shakespeare.";
-            }else if(a == 5){
-                document.getElementById('random').innerText="\"Lost time is never found again.\" - Benjamin Franklin.";
-            }else if(a == 6){
-                document.getElementById('random').innerText="\"Time is the most valuable thing a man can spend.\" - Theophrastus.";
-            }else if(a == 7){
-                document.getElementById('random').innerText="\"Time is the wisest counselor of all.\" - Pericles.";
-            }else{
-                document.getElementById('random').innerText="\"The key is in not spending time, but in investing it.\" - Stephen R. Covey.";
-            }
-        }, 10000);
-        function restartTypewriterEffect() {
-            const randomElement = document.getElementById('random');
-            randomElement.style.width = 'auto'; 
-            randomElement.style.animation = 'none';
-            void randomElement.offsetWidth; // Trigger reflow to reset the animation
-            randomElement.style.animation = null;
-        }
+    const lines = [
+    "\“Time you enjoy wasting is not wasted time.\” – Marthe Troly-Curtin",
+      "\“We must use time as a tool, not as a couch.\” – John F. Kennedy",
+      "\“Time is what we want most but what we use worst.\” – William Penn",
+      "\“Tough times never last, but tough people do.\” – Robert H. Schuller",
+      "\“Someday” is a disease that will take your dreams to the grave with you.\” – Timothy Ferriss",
+      "\“Yesterday’s the past, tomorrow’s the future, but today is a gift. That\’s why it\’s called the present.\” – Bil Keane",
+      "\“Better three hours too soon than a minute too late.\” – William Shakespeare",
+    ];
 
-        setInterval(restartTypewriterEffect, 10000);
+    function typewriterEffect() {
+      const typewriterTextElement = document.getElementById("anim");
+      const randomLine = lines[Math.floor(Math.random() * lines.length)];
+
+      typewriterTextElement.textContent = ""; // Clear existing text
+      for (let i = 0; i < randomLine.length; i++) {
+        setTimeout(() => {
+          typewriterTextElement.textContent += randomLine[i];
+        }, i * 100); // Adjust the speed of animation (milliseconds)
+      }
+    }
+
+    // Initial call to start the typewriter effect
+    typewriterEffect();
+
+    // Update the text every 10 seconds
+    setInterval(typewriterEffect, 10000);
+  </script>
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
   </body>
