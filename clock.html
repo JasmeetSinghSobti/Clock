@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Clock</title>
+    <link rel="shortcut icon" href="clock.png" type="image/x-icon" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="portfolio/style.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md">
+      <div class="container-fluid">
+        <a
+          class="navbar-brand text-primary text-opacity-75 mb-1"
+          href="index.html"
+          >Portfolio</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-target="#navbarScroll"
+          aria-controls="navbarScroll"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarScroll">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="clock.html">Clock</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="todo.html"
+                id="navbarScrollingDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                TODO's List
+              </a>
+              <ul
+                class="dropdown-menu"
+                aria-labelledby="navbarScrollingDropdown"
+              >
+                <li>
+                  <a class="dropdown-item" href="todo.html">Create List</a>
+                </li>
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-primary" type="submit">
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div class="container animated reveal" id="reveal-container">
+      <div class="mt-4 p-5 bg-color text-white rounded">
+        <h1 class="display-4 font-monospace">
+          <b id="color-text">Current time is:</b> <span id="time"></span>
+        </h1>
+        <p class="lead text-secondary">This is a clock with indian time zone</p>
+        <hr class="my-4" />
+        <div class="random">
+          <span id="anim"
+            >"The two most powerful warriors are patience and time. "– Leo
+            Tolstoy, War and Peace.</span
+          >
+        </div>
+        <a
+          href="https://www.timeanddate.com/worldclock/search.html"
+          target="_blank"
+        >
+          <button class="btn my-4 btn-primary" title="Browse time in google">
+            Browse Time
+          </button>
+        </a>
+      </div>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      let ar;
+      let date;
+      let time;
+      const options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      };
+      setInterval(() => {
+        ar = new Date();
+        date = ar.toLocaleDateString(undefined, options);
+        time = ar.getHours() + ":" + ar.getMinutes() + ":" + ar.getSeconds();
+        document.getElementById("time").innerHTML = time + "<br>on " + date;
+      }, 1000);
+      let a = 1;
+
+      const lines = [
+        `“Time you enjoy wasting is not wasted time.” \– Marthe Troly-Curtin. `,
+        `“We must use time as a tool, not as a couch.” \– John F. Kennedy. `,
+        `“Time is what we want most but what we use worst.” \– William Penn. `,
+        `“Tough times never last, but tough people do.” \– Robert H. Schuller. `,
+        `“Someday is a disease that will take your dreams to the grave with you.” \– Timothy Ferriss. `,
+        `“Yesterday\’s the past, tomorrow\’s the future, but today is a gift. That\’s why it\’s called the present.” \– Bil Keane. `,
+        `“Better three hours too soon than a minute too late.” \– William Shakespeare. `,
+      ];
+
+      function typewriterEffect() {
+        const typewriterTextElement = document.getElementById("anim");
+        const randomLine = lines[Math.floor(Math.random() * lines.length)];
+
+        typewriterTextElement.textContent = ""; // Clear existing text
+        for (let i = 0; i < randomLine.length; i++) {
+          setTimeout(() => {
+            typewriterTextElement.textContent += randomLine[i];
+          }, i * 100); // Adjust the speed of animation (milliseconds)
+        }
+      }
+
+      // Initial call to start the typewriter effect
+      typewriterEffect();
+
+      // Update the text every 10 seconds
+      setInterval(typewriterEffect, 20000);
+      const sections = document.querySelectorAll("section");
+      sections.forEach((section) => {
+        section.addEventListener("wheel", (event) => {
+          event.preventDefault();
+          const scrollDelta = Math.sign(event.deltaY);
+          const currentSectionIndex = [...sections].indexOf(section);
+          const nextSection = sections[currentSectionIndex + scrollDelta];
+          if (nextSection) {
+            nextSection.scrollIntoView({
+              behavior: "smooth",
+            });
+          } else {
+            // Navigate to the second HTML page when reaching the end
+            window.location.href = "clock.html";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

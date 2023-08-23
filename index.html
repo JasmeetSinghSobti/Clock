@@ -1,158 +1,136 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Clock</title>
-    <link rel="shortcut icon" href="clock.png" type="image/x-icon" >
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <style>
-        .search{
-            border-radius: 10px;
-            border: 10px;
-            margin: 10px;
-        }
-        #font{
-            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-            font-size: 50px;
-            color: rgb(255, 255, 255);
-            -webkit-text-stroke-width: 0.1px;
-            -webkit-text-stroke-color: rgba(0, 0, 0, 0.884);
-            margin-bottom: -15px;
-            margin-top: -15px;
-        }
-        #color-text{
-            color: rgb(71, 129, 206);
-        }
-        .random {
-            display: flex;
-            position: relative; /* Added to enable the transform animation */
-            overflow: hidden; /* Ensures the content is not revealed until the animation */
-            width: 60%;
-            color: rgba(0, 122, 192, 0.644);
-        }
-        
-        .random #anim::after {
-            content: "";
-            border-right: 2px solid white;
-            white-space: nowrap;
-            margin: 0;
-            letter-spacing: 2px;
-            animation: typewriter 2s steps(40) forwards,
-                        blinkrate 0.8s infinite;
-                        
-        }
-        @keyframes blinkrate {
-            0% { border-color: white; } /* Initial color */
-            50% { border-color: transparent; } /* Blink effect - border becomes transparent */
-            100% { border-color: white; } /* Back to the initial color */
-        }
-
-
-        @keyframes typewriter {
-            from{
-                width: 0; /* Start with zero width, effectively hiding the text */
-            }
-            to {
-                width: 100%; /* Gradually increase the width to reveal the text */
-            }
-        }
-        #height{
-            margin-top: -14px;
-            font-size: 40px;
-        }
-    </style>
-</head>
-  <body class="bg-dark">
-    <nav class="navbar navbar-expand-lg h5 text-bg-secondary bg-opacity-25">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <link rel="shortcut icon" href="portfolio/images.png" type="image/x-icon" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="portfolio/style.css" />
+  </head>
+  <body>
+    <div class="loading-container">
+      <img class="loading" src="portfolio/loading.gif" />
+      <br />
+      <div class="loading-text" id="text">Loading...</div>
+    </div>
+    <div class="content">
+      <div class="background-overlay"></div>
+      <nav class="navbar navbar-expand-md position-fixed">
         <div class="container-fluid">
-            <a class="navbar-brand text-primary" id="height" href="#">Clock</a>
-            <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <a class="navbar-port mb-1" href="#">Portfolio</a>
+          <button
+            class="navbar-toggler navbar-warning"
+            type="button"
+            data-bs-target="#navbarScroll"
+            aria-controls="navbarScroll"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
             <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          </button>
+          <div class="collapse navbar-collapse" id="navbarScroll">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                <a class="nav-link active text-light" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link text-light" href="todo.html">TODO's List</a>
-                </li>
-                <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Dropdown
+              <li class="nav-item">
+                <a
+                  class="nav-link active blue"
+                  aria-current="page"
+                  href="index.html"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="clock.html">Clock</a>
+              </li>
+              <li class="nav-item dropdown blue">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="todo.html"
+                  id="navbarScrollingDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  TODO's List
                 </a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <ul
+                  class="dropdown-menu"
+                  aria-labelledby="navbarScrollingDropdown"
+                >
+                  <li>
+                    <a class="dropdown-item" href="todo.html">Create List</a>
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider" />
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </li>
                 </ul>
-                </li>
+              </li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="search text-bg-primary bg-dark" type="search" placeholder=" Search" aria-label="Search">
-                <button class="btn h1 mt-2 btn-primary" type="submit">Search</button>
-
+            <form class="d-flex">
+              <input
+                class="form-control me-2"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+              />
+              <button class="btn btn-outline-primary" type="submit">
+                Search
+              </button>
             </form>
-            </div>
+          </div>
         </div>
-    </nav>
-    <div class="container">
-        <div class="mt-4 p-5 bg-gradient text-white rounded">
-            <h1 class="display-4 font-monospace"><b id="color-text">Current time is:</b> <span id="time"></span></h1>
-            <p class="lead text-secondary">This is a clock with indian time zone </p>
-            <hr class="my-4">
-            <div class="random"><span id="anim">"The two most powerful warriors are patience and time. "– Leo Tolstoy, War and Peace.</span></div>
-            <a href="https://www.timeanddate.com/worldclock/search.html" target="_blank">
-            <button class="btn my-4 btn-primary" title="Browse time in google">Browse Time</button>
-            </a>
+      </nav>
+      <section class="section section1 indexhtml">
+        <div class="welcome">
+          <span style="animation-delay: 0.4s">W</span>
+          <span style="animation-delay: 0.8s">e</span>
+          <span style="animation-delay: 1.2s">l</span>
+          <span style="animation-delay: 1.6s">c</span>
+          <span style="animation-delay: 2s">o</span>
+          <span style="animation-delay: 2.4s">m</span>
+          <span style="animation-delay: 2.8s">e</span>
+          &nbsp;&nbsp;
+          <span style="animation-delay: 3.2s">t</span>
+          <span style="animation-delay: 3.6s">o</span>
+          &nbsp;&nbsp;
+          <span style="animation-delay: 4s">m</span>
+          <span style="animation-delay: 4.4s">y</span>
+          &nbsp;&nbsp;
+          <span style="animation-delay: 4.8s">w</span>
+          <span style="animation-delay: 5.2s">e</span>
+          <span style="animation-delay: 5.6s">b</span>
+          <span style="animation-delay: 6s">s</span>
+          <span style="animation-delay: 6.4s">i</span>
+          <span style="animation-delay: 6.8s">t</span>
+          <span style="animation-delay: 7.2s">e</span>
         </div>
+      </section>
     </div>
     <script>
-        let ar;
-        let date;
-        let time;
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        setInterval(() => {
-            ar = new Date();
-            date = ar.toLocaleDateString(undefined, options);
-            time = ar.getHours() + ":" +ar.getMinutes() + ":" + ar.getSeconds();
-            document.getElementById('time').innerHTML = time + "<br>on " + date;
+      window.addEventListener("load", function () {
+        // This event fires when the entire page has loaded, including all images and other resources.
+
+        // Hide the loading screen and show the content
+        var loadingContainer = document.querySelector(".loading-container");
+        var content = document.querySelector(".content");
+        setTimeout(function () {
+          loadingContainer.style.display = "none";
+          content.style.display = "block";
         }, 1000);
-        let a = 1;
-      
-    
-
-    const lines = [
-      `“Time you enjoy wasting is not wasted time.” \– Marthe Troly-Curtin. `,
-      `“We must use time as a tool, not as a couch.” \– John F. Kennedy. `,
-      `“Time is what we want most but what we use worst.” \– William Penn. `,
-      `“Tough times never last, but tough people do.” \– Robert H. Schuller. `,
-      `“Someday” is a disease that will take your dreams to the grave with you.” \– Timothy Ferriss. `,
-      `“Yesterday\’s the past, tomorrow\’s the future, but today is a gift. That\’s why it\’s called the present.” \– Bil Keane. `,
-      `“Better three hours too soon than a minute too late.” \– William Shakespeare. `,
-    ];
-
-    function typewriterEffect() {
-      const typewriterTextElement = document.getElementById("anim");
-      const randomLine = lines[Math.floor(Math.random() * lines.length)];
-
-      typewriterTextElement.textContent = ""; // Clear existing text
-      for (let i = 0; i < randomLine.length; i++) {
-        setTimeout(() => {
-          typewriterTextElement.textContent += randomLine[i];
-        }, i * 100); // Adjust the speed of animation (milliseconds)
-      }
-    }
-
-    // Initial call to start the typewriter effect
-    typewriterEffect();
-
-    // Update the text every 10 seconds
-    setInterval(typewriterEffect, 20000);
-  </script>
+      });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   </body>
 </html>

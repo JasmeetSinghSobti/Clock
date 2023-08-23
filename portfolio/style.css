@@ -1,0 +1,196 @@
+body {
+  background-color: #0e1f3b;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+}
+.loading {
+  margin-top: 400px;
+  width: 200px;
+  height: auto;
+}
+.loading-text {
+  margin: 0;
+  font-size: 40px;
+  color: rgb(0, 247, 255);
+}
+.navbar-port {
+  color: White !important;
+  text-decoration: none;
+  font-size: 30px;
+  margin-right: 20px;
+}
+.navbar-nav .nav-item .nav-link {
+  color: yellow !important; /* Change link color to yellow */
+}
+.navbar-nav .nav-link.active {
+  color: rgb(255, 255, 255) !important; /* Change active link color to blue */
+}
+.links {
+  text-decoration: none;
+}
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.content {
+  display: none; /* Hide the content initially */
+}
+nav {
+  box-shadow: 0 5px 20px black;
+  background-color: rgb(11, 60, 105);
+  color: #fffb00;
+  font-size: 20px;
+  width: 60%;
+  margin-left: 464px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+}
+.indexhtml {
+  background-color: #323800;
+}
+.background-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://images.unsplash.com/photo-1437419764061-2473afe69fc2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1632&q=80"); /* Set the background image path */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  opacity: 0.7; /* Set the desired opacity for the background image */
+}
+.search {
+  border-radius: 10px;
+  border: 10px;
+  margin: 10px;
+}
+.bg-color {
+  background-color: #142b53;
+  box-shadow: -5px 5px 10px #0a0a0a;
+}
+.welcome {
+  font-size: 100px;
+  color: #ffffff;
+  text-shadow: 0 0 20px rgb(255, 255, 255), -5px 5px 10px black;
+  margin-top: -100px;
+  margin-left: 100px;
+  display: inline-block;
+  animation: text 2s forwards;
+  letter-spacing: 0;
+}
+.welcome > span {
+  display: inline-block;
+  animation: colour 16s infinite, wiggle 8s ease-in-out infinite;
+  padding: 0;
+  margin: 0;
+  margin-right: -0.3em;
+}
+
+@keyframes text {
+  0% {
+    padding-left: 100px;
+    margin-top: -350px;
+    opacity: 0;
+    font-size: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    font-size: 100px;
+    transform: translateY(0);
+  }
+}
+
+@keyframes wiggle {
+  0%,
+  96%,
+  100% {
+    transform: translateY(0);
+  }
+  98% {
+    transform: translateY(-20px);
+  }
+}
+@keyframes colour {
+  50%,
+  99% {
+    color: rgb(0, 140, 255);
+    text-shadow: 0 0 5px rgb(0, 140, 255);
+  }
+  100%,
+  49% {
+    color: white;
+    text-shadow: 0 0 10px white, -5px 5px 10px black;
+  }
+}
+
+.search {
+  border-radius: 10px;
+  border: 10px;
+  margin: 10px;
+}
+#font {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 50px;
+  color: rgb(255, 255, 255);
+  -webkit-text-stroke-width: 0.1px;
+  -webkit-text-stroke-color: rgba(0, 0, 0, 0.884);
+  margin-bottom: -15px;
+  margin-top: -15px;
+}
+#color-text {
+  color: #fffb00;
+}
+.random {
+  display: flex;
+  position: relative; /* Added to enable the transform animation */
+  overflow: hidden; /* Ensures the content is not revealed until the animation */
+  width: 100%;
+  font-size: 25px;
+  color: #fffb00;
+}
+
+.random #anim::after {
+  content: "";
+  border-right: 2px solid white;
+  white-space: nowrap;
+  margin: 0;
+  letter-spacing: 2px;
+  animation: typewriter 2s steps(40) forwards, blinkrate 0.8s infinite;
+}
+@keyframes blinkrate {
+  0% {
+    border-color: white;
+  } /* Initial color */
+  50% {
+    border-color: transparent;
+  } /* Blink effect - border becomes transparent */
+  100% {
+    border-color: white;
+  } /* Back to the initial color */
+}
+
+@keyframes typewriter {
+  from {
+    width: 0; /* Start with zero width, effectively hiding the text */
+  }
+  to {
+    width: 100%; /* Gradually increase the width to reveal the text */
+  }
+}
+#height {
+  margin-top: -14px;
+  font-size: 40px;
+}
