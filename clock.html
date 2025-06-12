@@ -1,169 +1,433 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Clock</title>
-    <link rel="shortcut icon" href="clock.png" type="image/x-icon" />
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
-      crossorigin="anonymous"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+        crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="portfolio/style.css" />
-  </head>
-  <body>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #e0e0e0;
+        }
+
+        .navbar {
+            background: rgba(0, 0, 0, 0.3) !important;
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1050;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-port {
+            color: #64b5f6 !important;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.3rem;
+            text-shadow: 0 0 10px rgba(100, 181, 246, 0.3);
+        }
+
+        .navbar-port:hover {
+            color: #90caf9 !important;
+            text-shadow: 0 0 15px rgba(144, 202, 249, 0.5);
+        }
+
+        .nav-link {
+            color: rgba(224, 224, 224, 0.9) !important;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #64b5f6 !important;
+        }
+
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28224, 224, 224, 0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        .dropdown-menu {
+            background: rgba(26, 26, 46, 0.95) !important;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(100, 181, 246, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .dropdown-item {
+            color: #e0e0e0 !important;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(100, 181, 246, 0.2) !important;
+            color: #64b5f6 !important;
+        }
+
+        .btn-outline-primary {
+            color: #64b5f6;
+            border-color: rgba(100, 181, 246, 0.5);
+        }
+
+        .btn-outline-primary:hover {
+            background-color: rgba(100, 181, 246, 0.2);
+            border-color: #64b5f6;
+            color: #64b5f6;
+        }
+
+        .form-control {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(100, 181, 246, 0.3);
+            color: #e0e0e0;
+        }
+
+        .form-control::placeholder {
+            color: rgba(224, 224, 224, 0.6);
+        }
+
+        .form-control:focus {
+            background: rgba(0, 0, 0, 0.5);
+            border-color: #64b5f6;
+            color: #e0e0e0;
+            box-shadow: 0 0 0 0.2rem rgba(100, 181, 246, 0.25);
+        }
+
+        .container {
+            animation: fadeInUp 1s ease-out;
+            margin-top: 80px; /* Account for fixed navbar */
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .bg-color {
+            background: rgba(0, 0, 0, 0.4) !important;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(100, 181, 246, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        #color-text {
+            background: linear-gradient(45deg, #64b5f6, #42a5f5, #2196f3, #1976d2);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient 3s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        #time {
+            font-family: 'Courier New', monospace;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            color: #e0e0e0;
+        }
+
+        .text-secondary {
+            color: rgba(224, 224, 224, 0.7) !important;
+        }
+
+        .random {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 4px solid #64b5f6;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #anim {
+            color: #e0e0e0;
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            display: block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(25, 118, 210, 0.5);
+            background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%);
+        }
+
+        .hr {
+            border-color: rgba(100, 181, 246, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .display-4 {
+                font-size: 1.8rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+                margin-top: 70px;
+            }
+            
+            .bg-color {
+                padding: 2rem !important;
+            }
+        }
+
+        /* Typewriter cursor effect */
+        #anim::after {
+            content: '|';
+            animation: blink 1s infinite;
+            color: #64b5f6;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Ensure dropdown works properly */
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        /* Smooth scrolling for better UX */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
     <nav class="navbar navbar-expand-md">
-      <div class="container-fluid">
-        <a class="navbar-port" href="index.html">Portfolio</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-target="#navbarScroll"
-          aria-controls="navbarScroll"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarScroll">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" href="clock.html">Clock</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="todo.html"
-                id="navbarScrollingDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
+        <div class="container-fluid">
+            <a class="navbar-port" href="#schedule">Time Teller</a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarScroll"
+                aria-controls="navbarScroll"
                 aria-expanded="false"
-              >
-                TODO's List
-              </a>
-              <ul
-                class="dropdown-menu"
-                aria-labelledby="navbarScrollingDropdown"
-              >
-                <li>
-                  <a class="dropdown-item" href="todo.html">Create List</a>
-                </li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <form class="d-flex">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-            />
-            <button class="btn btn-outline-primary" type="submit">
-              Search
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
             </button>
-          </form>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="index.html">🏠 Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="Clock.html">🕐 Clock</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            id="navbarScrollingDropdown"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            📋 TODO's List
+                        </a>
+                        <ul
+                            class="dropdown-menu"
+                            aria-labelledby="navbarScrollingDropdown"
+                        >
+                            <li>
+                                <a class="dropdown-item" href="ToDo.html">📝 Create List</a>
+                            </li>
+                            <li><hr class="dropdown-divider" style="border-color: rgba(100, 181, 246, 0.3);" /></li>
+                            <li>
+                                <a class="dropdown-item" href="ToDo.html">⚙️ Manage Lists</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <input
+                        class="form-control me-2"
+                        type="search"
+                        placeholder="Search..."
+                        aria-label="Search"
+                    />
+                    <button class="btn btn-outline-primary" type="submit">
+                        🔍
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
     </nav>
+
     <div class="container animated reveal" id="reveal-container">
-      <div class="mt-4 p-5 bg-color text-white rounded">
-        <h1 class="display-4 font-monospace">
-          <b id="color-text">Current time is:</b> <span id="time"></span>
-        </h1>
-        <p class="lead text-secondary">This is a clock with indian time zone</p>
-        <hr class="my-4" />
-        <div class="random">
-          <span id="anim"
-            >"The two most powerful warriors are patience and time. "– Leo
-            Tolstoy, War and Peace.</span
-          >
+        <div class="mt-4 p-5 bg-color text-white rounded">
+            <h1 class="display-4 font-monospace">
+                <b id="color-text">Current time is:</b>
+                <br>
+                <span id="time"></span>
+            </h1>
+            <p class="lead text-secondary">Real-time clock with automatic updates</p>
+            <hr class="my-4" style="border-color: rgba(100, 181, 246, 0.3);" />
+            <div class="random">
+                <span id="anim">Loading inspirational quote...</span>
+            </div>
+            <a
+                href="https://www.timeanddate.com/worldclock/search.html"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <button class="btn my-4 btn-primary" title="Browse time zones around the world">
+                    🌍 Browse World Time
+                </button>
+            </a>
         </div>
-        <a
-          href="https://www.timeanddate.com/worldclock/search.html"
-          target="_blank"
-        >
-          <button class="btn my-4 btn-primary" title="Browse time in google">
-            Browse Time
-          </button>
-        </a>
-      </div>
     </div>
+
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-      crossorigin="anonymous"
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"
     ></script>
     <script>
-      let ar;
-      let date;
-      let time;
-      const options = {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      };
-      setInterval(() => {
-        ar = new Date();
-        date = ar.toLocaleDateString(undefined, options);
-        time = ar.getHours() + ":" + ar.getMinutes() + ":" + ar.getSeconds();
-        document.getElementById("time").innerHTML = time + "<br>on " + date;
-      }, 1000);
-      let a = 1;
+        let currentDate;
+        let currentTime;
+        let typewriterTimeout;
 
-      const lines = [
-        `“Time you enjoy wasting is not wasted time.” \– Marthe Troly-Curtin. `,
-        `“We must use time as a tool, not as a couch.” \– John F. Kennedy. `,
-        `“Time is what we want most but what we use worst.” \– William Penn. `,
-        `“Tough times never last, but tough people do.” \– Robert H. Schuller. `,
-        `“Someday is a disease that will take your dreams to the grave with you.” \– Timothy Ferriss. `,
-        `“Yesterday\’s the past, tomorrow\’s the future, but today is a gift. That\’s why it\’s called the present.” \– Bil Keane. `,
-        `“Better three hours too soon than a minute too late.” \– William Shakespeare. `,
-      ];
+        const dateOptions = {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+        };
 
-      function typewriterEffect() {
-        const typewriterTextElement = document.getElementById("anim");
-        const randomLine = lines[Math.floor(Math.random() * lines.length)];
-
-        typewriterTextElement.textContent = ""; // Clear existing text
-        for (let i = 0; i < randomLine.length; i++) {
-          setTimeout(() => {
-            typewriterTextElement.textContent += randomLine[i];
-          }, i * 100); // Adjust the speed of animation (milliseconds)
+        // Update clock every second
+        function updateClock() {
+            currentDate = new Date();
+            const formattedDate = currentDate.toLocaleDateString(undefined, dateOptions);
+            
+            // Format time with leading zeros
+            const hours = currentDate.getHours().toString().padStart(2, '0');
+            const minutes = currentDate.getMinutes().toString().padStart(2, '0');
+            const seconds = currentDate.getSeconds().toString().padStart(2, '0');
+            
+            currentTime = `${hours}:${minutes}:${seconds}`;
+            
+            document.getElementById("time").innerHTML = `${currentTime}<br><small style="font-size: 0.6em; opacity: 0.8;">on ${formattedDate}</small>`;
         }
-      }
 
-      // Initial call to start the typewriter effect
-      typewriterEffect();
+        // Start the clock
+        updateClock(); // Initial call
+        setInterval(updateClock, 1000);
 
-      // Update the text every 10 seconds
-      setInterval(typewriterEffect, 20000);
-      const sections = document.querySelectorAll("section");
-      sections.forEach((section) => {
-        section.addEventListener("wheel", (event) => {
-          event.preventDefault();
-          const scrollDelta = Math.sign(event.deltaY);
-          const currentSectionIndex = [...sections].indexOf(section);
-          const nextSection = sections[currentSectionIndex + scrollDelta];
-          if (nextSection) {
-            nextSection.scrollIntoView({
-              behavior: "smooth",
+        // Inspirational quotes array
+        const inspirationalQuotes = [
+            `"Time you enjoy wasting is not wasted time." – Marthe Troly-Curtin`,
+            `"We must use time as a tool, not as a couch." – John F. Kennedy`,
+            `"Time is what we want most but what we use worst." – William Penn`,
+            `"Tough times never last, but tough people do." – Robert H. Schuller`,
+            `"Someday is a disease that will take your dreams to the grave with you." – Timothy Ferriss`,
+            `"Yesterday's the past, tomorrow's the future, but today is a gift. That's why it's called the present." – Bil Keane`,
+            `"Better three hours too soon than a minute too late." – William Shakespeare`,
+            `"The two most powerful warriors are patience and time." – Leo Tolstoy`,
+            `"Time flies like an arrow; fruit flies like a banana." – Anthony G. Oettinger`,
+            `"Lost time is never found again." – Benjamin Franklin`,
+            `"Time is the most valuable thing we have and the most wasteful thing we do." – Unknown`,
+            `"Don't watch the clock; do what it does. Keep going." – Sam Levenson`
+        ];
+
+        // Typewriter effect function
+        function typewriterEffect() {
+            const typewriterElement = document.getElementById("anim");
+            const randomQuote = inspirationalQuotes[Math.floor(Math.random() * inspirationalQuotes.length)];
+
+            // Clear existing text and remove cursor
+            typewriterElement.style.removeProperty('--show-cursor');
+            typewriterElement.textContent = "";
+            
+            // Clear any existing timeout
+            if (typewriterTimeout) {
+                clearTimeout(typewriterTimeout);
+            }
+
+            // Type each character
+            for (let i = 0; i < randomQuote.length; i++) {
+                setTimeout(() => {
+                    typewriterElement.textContent += randomQuote[i];
+                    
+                    // Remove cursor after typing is complete
+                    if (i === randomQuote.length - 1) {
+                        setTimeout(() => {
+                            typewriterElement.style.setProperty('--show-cursor', 'none');
+                        }, 1000);
+                    }
+                }, i * 50); // Faster typing speed
+            }
+        }
+
+        // Initialize typewriter effect
+        typewriterEffect();
+
+        // Update quote every 15 seconds
+        setInterval(typewriterEffect, 15000);
+
+        // Add some interactive features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click event to time display for fun
+            document.getElementById('time').addEventListener('click', function() {
+                this.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
             });
-          } else {
-            // Navigate to the second HTML page when reaching the end
-            window.location.href = "clock.html";
-          }
+
+            // Add hover effect to the main container
+            const mainContainer = document.querySelector('.bg-color');
+            mainContainer.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.4)';
+            });
+            
+            mainContainer.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.3)';
+            });
         });
-      });
+
+        // Add smooth transitions
+        document.getElementById('time').style.transition = 'all 0.2s ease';
+        document.querySelector('.bg-color').style.transition = 'all 0.3s ease';
     </script>
-  </body>
+</body>
 </html>
